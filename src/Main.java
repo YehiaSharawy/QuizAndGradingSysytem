@@ -43,13 +43,13 @@ public class Main {
                     continueloop = false;
                     break;
                 case "+":
-                    System.out.println("You chose PLUS [+] operation questions");
-                    type_question = "plus";
+                    System.out.println("You chose ADDITION [+] operation questions");
+                    type_question = "addition";
                     continueloop = false;
                     break;
                 case "-":
-                    System.out.println("You chose MINUS [-] operation questions");
-                    type_question = "minus";
+                    System.out.println("You chose SUBTRACTION [-] operation questions");
+                    type_question = "subtraction";
                     continueloop = false;
                     break;
                 case "*":
@@ -67,13 +67,28 @@ public class Main {
             }
         }while (continueloop);
         System.out.println();
+        //Randomizer if the user chose random question
+        if(type_question=="random"){
+            String initialOperations = "asmd";
+            int randomInitialOperation = (int)(0+Math.random()*4);
+            if(initialOperations.charAt(randomInitialOperation)=='a')
+                type_question = "addition";
+            else if (initialOperations.charAt(randomInitialOperation) == 's')
+                type_question = "subtraction";
+            else if (initialOperations.charAt(randomInitialOperation) == 'm')
+                type_question = "multiplication";
+            else
+                type_question = "division";
+            System.out.println(type_question);
+        }
         //looping each student with there question depending on what operation the user chose
         for (int i=1;i<=num_student;i++){
-            int firstnum=0 , secondnum=0, answer=0, guess=0, numofCorrectguesses=0;
+            int firstnum=0 , secondnum=0, answer=0, guess=0, numCorrect=0, numWrong=0;
+            String CorrectAns="", WrongAns="";
             System.out.println("Student "+i);
             System.out.println("----------------------");
 
-            if(type_question=="plus"){
+            if(type_question=="addition"){
                 for (int j=0;j<num_questions;j++){
                     firstnum =(int)(Math.random()*10);
                     secondnum = (int)(Math.random()*10);
@@ -82,15 +97,18 @@ public class Main {
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
+                        numWrong++;
                         System.out.println(firstnum+" + "+secondnum+" should be "+ answer);
+                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
-                        numofCorrectguesses++;
+                        numCorrect++;
+                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
                 }
             }
 
-            else if(type_question=="minus"){
+            else if(type_question=="subtraction"){
                 for (int j=0;j<num_questions;j++){
                     firstnum =(int)(Math.random()*10);
                     secondnum = (int)(Math.random()*10);
@@ -104,10 +122,13 @@ public class Main {
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
+                        numWrong++;
                         System.out.println(firstnum+" - "+secondnum+" should be "+ answer);
+                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
-                        numofCorrectguesses++;
+                        numCorrect++;
+                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
                 }
             }
@@ -121,15 +142,18 @@ public class Main {
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
+                        numWrong++;
                         System.out.println(firstnum+" * "+secondnum+" should be "+ answer);
+                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
-                        numofCorrectguesses++;
+                        numCorrect++;
+                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
                 }
             }
 
-            else if(type_question=="division"){
+            else{ // Division
                 for (int j=0;j<num_questions;j++){
                     firstnum =(int)(Math.random()*10);
                     secondnum = (int)(Math.random()*10);
@@ -138,20 +162,20 @@ public class Main {
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
+                        numWrong++;
                         System.out.println(firstnum+" / "+secondnum+" should be "+ answer);
+                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
-                        numofCorrectguesses++;
+                        numCorrect++;
+                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
                 }
             }
-
-            else{ //Random question
-                for (int j=0;j<num_questions;j++){
-
-                }
-            }
-            System.out.println("Number of correct answers are ["+numofCorrectguesses+"]");
+            System.out.println("\nCorrect answers are ["+numCorrect+"]");
+            System.out.println(CorrectAns);
+            System.out.println("Wrong answers are ["+numWrong+"]");
+            System.out.println(WrongAns+"\n");
         }
 
 
