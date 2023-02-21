@@ -79,11 +79,12 @@ public class Main {
                 type_question = "multiplication";
             else
                 type_question = "division";
-            System.out.println(type_question);
         }
         //looping each student with there question depending on what operation the user chose
         for (int i=1;i<=num_student;i++){
             int firstnum=0 , secondnum=0, answer=0, guess=0, numCorrect=0, numWrong=0;
+            long start=0, end = 0;
+            float seconds;
             String CorrectAns="", WrongAns="";
             System.out.println("Student "+i);
             System.out.println("----------------------");
@@ -93,18 +94,20 @@ public class Main {
                     firstnum =(int)(Math.random()*10);
                     secondnum = (int)(Math.random()*10);
                     answer = firstnum + secondnum;
+                    start = System.currentTimeMillis();
                     System.out.print("What is "+firstnum+" + "+secondnum+" ? : ");
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
                         numWrong++;
                         System.out.println(firstnum+" + "+secondnum+" should be "+ answer);
-                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        WrongAns += ""+firstnum+"+"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
                         numCorrect++;
-                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        CorrectAns += ""+firstnum+"+"+secondnum+"="+guess+" ";
                     }
+                    end = System.currentTimeMillis();
                 }
             }
 
@@ -118,6 +121,7 @@ public class Main {
                         firstnum-= secondnum;
                     }
                     answer = firstnum - secondnum;
+                    start = System.currentTimeMillis();
                     System.out.print("What is "+firstnum+" - "+secondnum+" ? : ");
                     guess = x.nextInt();
                     if(guess!=answer){
@@ -130,6 +134,7 @@ public class Main {
                         numCorrect++;
                         CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
+                    end = System.currentTimeMillis();
                 }
             }
 
@@ -138,44 +143,55 @@ public class Main {
                     firstnum =(int)(Math.random()*10);
                     secondnum = (int)(Math.random()*10);
                     answer = firstnum * secondnum;
+                    start = System.currentTimeMillis();
                     System.out.print("What is "+firstnum+" * "+secondnum+" ? : ");
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
                         numWrong++;
                         System.out.println(firstnum+" * "+secondnum+" should be "+ answer);
-                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        WrongAns += ""+firstnum+"*"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
                         numCorrect++;
-                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        CorrectAns += ""+firstnum+"*"+secondnum+"="+guess+" ";
                     }
+                    end = System.currentTimeMillis();
                 }
             }
 
             else{ // Division
                 for (int j=0;j<num_questions;j++){
                     firstnum =(int)(Math.random()*10);
-                    secondnum = (int)(Math.random()*10);
+                    do{
+                        secondnum = (int)(Math.random()*10);
+                        if(secondnum!=0)
+                            break;
+                    }while(true);
                     answer = firstnum / secondnum;
+                    start = System.currentTimeMillis();
                     System.out.print("What is "+firstnum+" / "+secondnum+" ? : ");
                     guess = x.nextInt();
                     if(guess!=answer){
                         System.out.println("Your answer is wrong.");
                         numWrong++;
                         System.out.println(firstnum+" / "+secondnum+" should be "+ answer);
-                        WrongAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        WrongAns += ""+firstnum+"/"+secondnum+"="+guess+" ";
                     }else {
                         System.out.println("Your answer is correct!");
                         numCorrect++;
-                        CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
+                        CorrectAns += ""+firstnum+"/"+secondnum+"="+guess+" ";
                     }
+                    end = System.currentTimeMillis();
                 }
             }
+            
             System.out.println("\nCorrect answers are ["+numCorrect+"]");
             System.out.println(CorrectAns);
             System.out.println("Wrong answers are ["+numWrong+"]");
-            System.out.println(WrongAns+"\n");
+            System.out.println(WrongAns);
+            System.out.println("Estimated time took "+(end-start)/1000F + " seconds!!");
+
         }
 
 
