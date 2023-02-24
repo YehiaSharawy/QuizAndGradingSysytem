@@ -19,9 +19,10 @@ public class Main {
             System.out.println("Out of range! Try Again!!");
         }while(true);
         //Entering name of students based on the num of students
-        System.out.println("Enter the name of each student:");
+        System.out.println("Enter the first name of each student:");
         for (int i=0;i<num_student;i++){
-            names += x.next()+" ";
+            String nameinput = x.next();
+            names += nameinput.substring(0,1).toUpperCase()+nameinput.substring(1)+" "; //capitalize the first leeter of the name
         }
         //looping if num of questions isn't more than 0
         do{
@@ -81,13 +82,16 @@ public class Main {
                 type_question = "division";
         }
         //looping each student with there question depending on what operation the user chose
+        String name = names;
         for (int i=1;i<=num_student;i++){
             int firstnum=0 , secondnum=0, answer=0, guess=0, numCorrect=0, numWrong=0;
             long start=0, end = 0;
             float seconds;
             String CorrectAns="", WrongAns="";
-            System.out.println("Student "+i);
+
+            System.out.println("Student "+ name.substring(0,name.indexOf(' ')));
             System.out.println("----------------------");
+            name = name.substring(name.indexOf(' ')+1);
 
             if(type_question=="addition"){
                 for (int j=0;j<num_questions;j++){
@@ -186,25 +190,24 @@ public class Main {
                 }
             }
             
-            System.out.println("\nCorrect answers are ["+numCorrect+"]");
+            System.out.print("\nCorrect answers are ["+numCorrect+"]: ");
             System.out.println(CorrectAns);
-            System.out.println("Wrong answers are ["+numWrong+"]");
+            System.out.print("Wrong answers are ["+numWrong+"]: ");
             System.out.println(WrongAns);
-            System.out.println("Estimated time took "+(end-start)/1000F + " seconds!!");
-
+            System.out.println("Estimated time took "+(end-start)/1000F + " seconds!! \n");
         }
-
-
-
-
-/*
-
-        String name1 = names.substring(0, names.indexOf(' '));
-        String name2 = names.substring(names.indexOf(' ') + 1, names.indexOf(' ',names.indexOf(' ') +1));
-        String name3 = names.substring(names.indexOf(' ',names.indexOf(' ') +1) + 1);
-        System.out.println(names);
-        System.out.println(option);
-*/
-
+        //Displaying the scores using a printf table
+        name = names; // resetting the name string
+        System.out.printf("--------------------------------%n");
+        System.out.printf("|          GRADE ORDER         |%n");
+        System.out.printf("--------------------------------%n");
+        System.out.printf("| %-10s | %-8s | %4s |%n", "NAME", "GRADE", "TIME");
+        System.out.printf("--------------------------------%n");
+        //looping the students with their score and time
+        for (int i=1;i<=num_student;i++){
+            System.out.printf("| %-10s | %-8s | %04d |%n", name.substring(0,name.indexOf(' ')) , "A",  64);
+            name = name.substring(name.indexOf(' ')+1);
+            System.out.printf("--------------------------------%n");
+        }
     }
 }
