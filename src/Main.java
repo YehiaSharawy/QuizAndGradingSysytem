@@ -2,13 +2,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner x = new Scanner(System.in);
-
         int num_student;
         int num_questions;
         String names = "";
         String type_question = null;
         String option = null;
         boolean continueloop = true;
+        String studentname="", time ="", info = "",grade="U";
 
         //looping if num of students isn't more than 0
         do{
@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Enter the first name of each student:");
         for (int i=0;i<num_student;i++){
             String nameinput = x.next();
-            names += nameinput.substring(0,1).toUpperCase()+nameinput.substring(1)+" "; //capitalize the first leeter of the name
+            names += nameinput.substring(0,1).toUpperCase()+nameinput.substring(1)+" "; //capitalize the first letter of the name
         }
         //looping if num of questions isn't more than 0
         do{
@@ -88,8 +88,8 @@ public class Main {
             long start=0, end = 0;
             float seconds;
             String CorrectAns="", WrongAns="";
-
-            System.out.println("Student "+ name.substring(0,name.indexOf(' ')));
+            studentname = name.substring(0,name.indexOf(' '));
+            System.out.println("Student "+ studentname);
             System.out.println("----------------------");
             name = name.substring(name.indexOf(' ')+1);
 
@@ -112,6 +112,17 @@ public class Main {
                         CorrectAns += ""+firstnum+"+"+secondnum+"="+guess+" ";
                     }
                     end = System.currentTimeMillis();
+                    //grading system
+                    if(numCorrect>numWrong&&numCorrect==num_questions){
+                        grade="A";
+                    } else if (numCorrect>numWrong) {
+                        grade="B";
+                    } else if(numCorrect==numWrong){
+                        grade="C";
+                    }else if(numCorrect<numWrong&&numCorrect>0){
+                        grade="D";
+                    }else
+                        grade="F";
                 }
             }
 
@@ -139,6 +150,17 @@ public class Main {
                         CorrectAns += ""+firstnum+"-"+secondnum+"="+guess+" ";
                     }
                     end = System.currentTimeMillis();
+                    //grading system
+                    if(numCorrect>numWrong&&numCorrect==num_questions){
+                        grade="A";
+                    } else if (numCorrect>numWrong) {
+                        grade="B";
+                    } else if(numCorrect==numWrong){
+                        grade="C";
+                    }else if(numCorrect<numWrong&&numCorrect>0){
+                        grade="D";
+                    }else
+                        grade="F";
                 }
             }
 
@@ -161,6 +183,17 @@ public class Main {
                         CorrectAns += ""+firstnum+"*"+secondnum+"="+guess+" ";
                     }
                     end = System.currentTimeMillis();
+                    //grading system
+                    if(numCorrect>numWrong&&numCorrect==num_questions){
+                        grade="A";
+                    } else if (numCorrect>numWrong) {
+                        grade="B";
+                    } else if(numCorrect==numWrong){
+                        grade="C";
+                    }else if(numCorrect<numWrong&&numCorrect>0){
+                        grade="D";
+                    }else
+                        grade="F";
                 }
             }
 
@@ -187,27 +220,42 @@ public class Main {
                         CorrectAns += ""+firstnum+"/"+secondnum+"="+guess+" ";
                     }
                     end = System.currentTimeMillis();
+                    //grading system
+                    if(numCorrect>numWrong&&numCorrect==num_questions){
+                        grade="A";
+                    } else if (numCorrect>numWrong) {
+                        grade="B";
+                    } else if(numCorrect==numWrong){
+                        grade="C";
+                    }else if(numCorrect<numWrong&&numCorrect>0){
+                        grade="D";
+                    }else
+                        grade="F";
                 }
             }
+            time = ""+(end-start)/1000F; // calculating time took to finish the quiz
             
             System.out.print("\nCorrect answers are ["+numCorrect+"]: ");
             System.out.println(CorrectAns);
             System.out.print("Wrong answers are ["+numWrong+"]: ");
             System.out.println(WrongAns);
-            System.out.println("Estimated time took "+(end-start)/1000F + " seconds!! \n");
+            System.out.println("Estimated time took "+time+" seconds!! \n");
+
+            info += studentname+"+"+grade+"-"+time+" ";
         }
         //Displaying the scores using a printf table
         name = names; // resetting the name string
-        System.out.printf("--------------------------------%n");
-        System.out.printf("|          GRADE ORDER         |%n");
-        System.out.printf("--------------------------------%n");
-        System.out.printf("| %-10s | %-8s | %4s |%n", "NAME", "GRADE", "TIME");
-        System.out.printf("--------------------------------%n");
+        System.out.printf("----------------------------------%n");
+        System.out.printf("|           GRADE ORDER          |%n");
+        System.out.printf("----------------------------------%n");
+        System.out.printf("| %-10s | %-8s | %6s |%n", "NAME", "GRADE", "TIME");
+        System.out.printf("----------------------------------%n");
         //looping the students with their score and time
         for (int i=1;i<=num_student;i++){
-            System.out.printf("| %-10s | %-8s | %04d |%n", name.substring(0,name.indexOf(' ')) , "A",  64);
+            System.out.printf("| %-10s | %-8s | %-6s |%n", name.substring(0,name.indexOf(' ')) , info.substring(info.indexOf("+")+1,info.indexOf("-")),  info.substring(info.indexOf("-")+1,info.indexOf(" ")));
             name = name.substring(name.indexOf(' ')+1);
-            System.out.printf("--------------------------------%n");
+            info = info.substring(info.indexOf(' ')+1);
+            System.out.printf("----------------------------------%n");
         }
     }
 }
