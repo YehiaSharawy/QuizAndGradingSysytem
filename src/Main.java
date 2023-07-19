@@ -5,6 +5,7 @@ public class Main {
         Scanner x = new Scanner(System.in);
         int num_student;
         int num_questions;
+        ArrayList<Student> students = new ArrayList<>();
 
         //looping if num of students isn't more than 0
         do{
@@ -16,7 +17,6 @@ public class Main {
         }while(true);
 
         //Entering name of students based on the num of students
-        ArrayList<Student> students = new ArrayList<>();
         System.out.println("Enter the first name of each student:");
         for (int i =0; i<num_student;i++)
             students.add(new Student(x.next()));
@@ -36,6 +36,14 @@ public class Main {
         TypeOfQuestions typeOfQuestions = new TypeOfQuestions(x.next());
         typeOfQuestions.setTypeOfQuestions();
 
+        //looping each student with there question depending on what operation the user chose
+        for (int i=0;i<students.size();i++){
+            System.out.println();
+            System.out.println("Student "+ students.get(i).getName());
+            System.out.println("----------------------");
+            Questions questions = new Questions();
+            questions.generateQuestion();
+        }
 
 //      //looping each student with there question depending on what operation the user chose
 //        String name = names;

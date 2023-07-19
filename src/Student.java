@@ -1,14 +1,13 @@
 public class Student {
     private String name;
     private String grade;
-    private String estimatedTimeCompletion;
+    static String estimatedTimeCompletion;
     private static int numberOfQuestions;
 
     public String getName() {
         return name;
     }
-
-    public int getNumberOfQuestions() {
+    public static int getNumberOfQuestions() {
         return numberOfQuestions;
     }
 
@@ -18,11 +17,14 @@ public class Student {
     public static void setNumberOfQuestions(int numberOfQuestions) {
         Student.numberOfQuestions = numberOfQuestions;
     }
+    public static void setEstimatedTimeCompletion(String estimatedTimeCompletion) {
+        Student.estimatedTimeCompletion = estimatedTimeCompletion;
+    }
 
     public Student(String name, String grade, String estimatedTimeCompletion){
         setName(name);
         this.grade = grade;
-        this.estimatedTimeCompletion = estimatedTimeCompletion;
+        Student.estimatedTimeCompletion = estimatedTimeCompletion;
     }
 
     public Student(String name){
